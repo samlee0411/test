@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1"><br></p>
+<p class="p2">&lt;!DOCTYPE html&gt;</p>
+<p class="p2">&lt;html lang="en"&gt;</p>
+<p class="p2">&lt;head&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;title&gt;Chat Widget&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;!-- Load React and ReactDOM --&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.development.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;!-- Load Sendbird Chat AI Widget --&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>window.process = { env: { NODE_ENV: 'production' } };</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/@sendbird/chat-ai-widget@latest/dist/index.umd.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;link href="https://unpkg.com/@sendbird/chat-ai-widget@latest/dist/style.css" rel="stylesheet" /&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;!-- Optional: Enable JSX syntax --&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>html, body { height: 100%; margin: 0; display: flex; justify-content: center; align-items: center; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>#aichatbot-widget-close-icon { display: none; }</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p2">&lt;/head&gt;</p>
+<p class="p2">&lt;body&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;div id="root"&gt;&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const { ChatWindow } = window.ChatAiWidget;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const USER_ID = "348348com";</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const SESSION_TOKEN = "eyhbGciOiJIUzI1NiIsInR5cCI6IkpXVC9.ey1IjoyOTU4MDMzNjMsInYiOjEsImUiOjE3MzQxNDg2MDN9.Cq8tXEFUeVhkEDkdwHFT-YenRlleZA-PpMhSBO-5xxI";</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const APPLICATION_ID = "630BA50D-4EC5-4969-82F2-77749E25A48B";</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const BOT_ID = "aSJaO9uBHWIZOreNVRhBo";</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const CHANNEL_URL = "sendbird_group_channel_295245861_e1b9c85f8cd6145bae59de7ede6598c37aa6c02d";</p>
+<p class="p1"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>const configureSession = () =&gt; ({</p>
+<p class="p2"><span class="Apple-converted-space">            </span>onSessionTokenRequired: (resolve, reject) =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>resolve(SESSION_TOKEN);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><span class="Apple-converted-space">            </span>onSessionRefreshed: () =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>console.log("Session refreshed");</p>
+<p class="p2"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><span class="Apple-converted-space">            </span>onSessionError: (err) =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>console.error("Session error:", err);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><span class="Apple-converted-space">            </span>onSessionClosed: () =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>console.log("Session closed");</p>
+<p class="p2"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>const App = () =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>return (</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;ChatWindow</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>userId={USER_ID}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>appId={APPLICATION_ID}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>botId={BOT_ID}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>channelUrl={CHANNEL_URL}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>configureSession={configureSession}</p>
+<p class="p2"><span class="Apple-converted-space">                </span>/&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>ReactDOM.createRoot(document.getElementById('root')).render(&lt;App /&gt;);</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p2">&lt;/body&gt;</p>
+<p class="p2">&lt;/html&gt;</p>
+</body>
+</html>
